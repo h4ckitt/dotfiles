@@ -71,8 +71,8 @@ add_path(){
 	pat="$1"
 	current_shell=$SHELL
 	case $current_shell in
-		*"/bin/zsh") file="~/.zshrc" ;;
-		*"/bin/bash") file="~/.bashhrc";;
+		*"/bin/zsh") file=~/.zshrc ;;
+		*"/bin/bash") file=~/.bashhrc;;
 		*) echo "No Compatible Shell Found\nExiting";return;;
 	esac
 	[ ! -z $pat ] || {
