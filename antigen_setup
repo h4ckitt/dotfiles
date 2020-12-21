@@ -1,0 +1,46 @@
+#!/bin/bash
+
+check() {
+	if [ ! -z $(grep antigen ~/.zshrc) >/dev/null 2>&1 ] || [ -f ~/.antigenrc ]; then
+			echo "You Got Antigen Installed Already"
+			exit 0
+	fi
+}
+
+populate(){
+	file="$1"
+	echo "# Use Oh-My-Zsh" >> $file
+	echo "antigen use oh-my-zsh" >> $file
+	echo "" >> $file
+	echo "antigen bundle zsh-users/zsh-completions" >> $file
+	echo "antigen bundle zsh-users/zsh-autosuggestions" >> $file
+	echo "antigen bundle zsh-users/zsh-syntax-highlighting" >> $file
+	echo "antigen bundle command-not-found" >> $file
+	echo "" >> $file
+	echo "# Apply Configs" >> $file
+	echo "antigen apply" >> $file
+}
+
+check
+echo "Downloading Antigen"
+
+[ $(which curl) 2>/dev/null ] || {
+	echo "Curl Is Needed"
+	exit 1
+}
+
+[ -d ~/.antigen ] || mkdir ~/.antigen
+
+curl -fSsL git.io/antigen > ~/.antigen/antigen.zsh
+
+if [ ! -f ~/.zshrc ]; then
+	echo "# Load Antigen" >> ~/.zshrc
+	echo "source ~/.antigen/antigen.zsh" >> ~/.zshrc
+	echo ""
+	echo "Load Antigen Configs" >> ~/.zshrc
+	echo "antigen init ~/.antigenrc" >> ~/.zshrc
+else
+sed -i '1 i\#Load Antigen\nsource ~/.antigen/antigen.zsh\n\n#Load Antigen Configs\nantigen init ~/.antigenrc' ~/.zshrc
+fi
+
+populate ~/.antigenrc
