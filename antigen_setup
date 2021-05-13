@@ -1,10 +1,23 @@
 #!/bin/bash
 
 check() {
+	[ ! -z $(which zsh) ] || {
+		echo "Zsh Is Quite Needed"
+		exit 1
+	}
+	[ -f ~/.zshrc ] || {
+		echo "Uhh, You Need To Have Used zsh At Least Once, You're Missing An Important File"
+		exit 1
+	}
 	if [ ! -z $(grep antigen ~/.zshrc) >/dev/null 2>&1 ] || [ -f ~/.antigenrc ]; then
 			echo "You Got Antigen Installed Already"
 			exit 0
 	fi
+
+	[ $(which curl) 2>/dev/null ] || {
+	echo "Curl Is Needed"
+	exit 1
+	}
 }
 
 populate(){
@@ -24,11 +37,6 @@ populate(){
 check
 echo "Downloading Antigen"
 
-[ $(which curl) 2>/dev/null ] || {
-	echo "Curl Is Needed"
-	exit 1
-}
-
 [ -d ~/.antigen ] || mkdir ~/.antigen
 
 curl -fSsL git.io/antigen > ~/.antigen/antigen.zsh
@@ -44,3 +52,6 @@ sed -i '1 i\#Load Antigen\nsource ~/.antigen/antigen.zsh\n\n#Load Antigen Config
 fi
 
 populate ~/.antigenrc
+cp .aliases ~
+cp .functions ~
+cp .pattern.sed ~
