@@ -88,3 +88,69 @@ add_path(){
 	new_line="export PATH=$prev$pat:$""PATH"
 	sed -i ''$line's@.*@'$new_line'@' $file
 }
+
+# Turn On Or Off Private VPN
+vpn(){
+	[ -f ~/.vpn_status ] || echo 0 > ~/.vpn_status
+	vpn_status=$(cat ~/.vpn_status)
+	[ -z $1 ] || {
+		case $1 in
+			"-s") if [ $vpn_status -eq 0 ]; then
+					echo "VPN Is Off"
+					return
+				fi
+				echo "VPN Is On"
+				return
+				;;
+		esac
+	}
+	if [ $vpn_status -eq 0 ]; then
+		sudo systemctl start wg-quick@Raid
+		echo 1 > ~/.vpn_status
+		return
+	fi
+	sudo systemctl stop wg-quick@Raid
+	echo 0 > ~/.vpn_status
+}
+
+# Compile And Run CS Code
+csrun(){
+	[ ! -z $1 ] || {
+		echo "Usage: $0 <file.cs>"
+		return 1
+	}
+
+	csc $1
+	filename=${1%.*}
+	[ -f $filename.exe ] || return
+	mono $filename.exe
+	rm -rf $filename.exe
+}
+
+#I'm Not Telling
+phdl(){
+	
+	[ ! -z $1 ] || {
+		echo "$(date +%H:%M)"
+		return
+	}
+	~/Documents/Proj/PHDL/phdl $1
+}
+
+#Create A New Project And Automatically Initialize It In Git
+newproj(){
+	if [ ! -z $1 ]; then
+		projname="$@"
+	fi
+	[ ! -z $projname ] || {
+		echo -ne "Project Name:"
+		read $projname
+	}
+	mkd $projname
+	echo -ne "Initialize Git Repo? [Y/n]: "
+	read option
+	opt=$(tr '[[:upper:]]' '[[:lower:]]' <<< $option)
+	[ "$opt" = "n" ] || {
+		git init
+	}
+}
