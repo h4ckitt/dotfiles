@@ -139,14 +139,12 @@ phdl(){
 
 #Create A New Project And Automatically Initialize It In Git
 newproj(){
-	if [ ! -z $1 ]; then
-		projname="$@"
-	fi
-	[ ! -z $projname ] || {
-		echo -ne "Project Name:"
-		read $projname
+	projname="$@"
+	[ ! -z "$projname" ] || {
+		echo -ne "Project Name: "
+		read projname
 	}
-	mkd $projname
+	mkd "$projname"
 	echo -ne "Initialize Git Repo? [Y/n]: "
 	read option
 	opt=$(tr '[[:upper:]]' '[[:lower:]]' <<< $option)
