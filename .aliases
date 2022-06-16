@@ -77,7 +77,7 @@ alias tldr='tldr -t base16'
 
 # Developer shortcuts
 alias g='git'
-alias python='python3'
+#alias python='python3'
 alias s='subl'
 alias v='nvim'
 
@@ -96,3 +96,4 @@ alias the-house='ssh root@157.245.37.63'
 alias postman='Postman >/dev/null 2>&1 &'
 alias vpn-en='sudo systemctl start wg-quick@Raid'
 alias vpn-dis='sudo systemctl stop wg-quick@Raid'
+alias install='sudo apt install'

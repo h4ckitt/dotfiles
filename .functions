@@ -152,3 +152,30 @@ newproj(){
 		git init
 	}
 }
+
+# Mouse Jiggler For When I'm Working With An Acitivity Monitor
+idlemonitor() {
+#requires:
+# 'xprintidle' for inactivity check (in ms)
+# 'rand' for generating random number (screen resolution)
+# 'xdotool' to move the mouse pointer
+
+#parameters:
+# 100000 idle time in ms before executing the mousemove
+# 800 / 600: your screen resolution, at at least the moving range for the mouse pointer
+
+idletime=$1
+
+if [ -z "$idletime" ]; then 
+	idletime=10000
+fi
+
+while :; do
+    if  [ $(xprintidle) -gt $idletime ]
+    then
+        xdotool mousemove `rand -M 1920` `rand -M 1080`;
+    fi
+
+    sleep 30
+done
+}
