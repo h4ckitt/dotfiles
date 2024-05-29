@@ -1,72 +1,114 @@
-# Anigen Source
-source ~/.files/antigen.zsh
+#Load Antigen
+source ~/.antigen/antigen.zsh
+
+#Source Aliases And Custom Functions
+source ~/.aliases
+source ~/.functions
+#Load Antigen Configs
 antigen init ~/.antigenrc
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:/home/dharmy/.local/bin:/home/dharmy/go/bin:/home/dharmy/Documents/tools/Wakatime:/home/dharmy/Documents/tools/conservation_mode:/home/dharmy/Documents/tools/Postman:/home/dharmy/Documents/tools/openapi-generator:/home/dharmy/Documents/tools/openapi-generator/apache-maven-3.9.2/bin:/home/dharmy/Documents/tools/diff-so-fancy:/home/dharmy/Documents/tools/k9s/execs:/home/dharmy/Documents/tools/platform-tools:/home/dharmy/.fly/bin:/home/dharmy/Documents/tools/stripe:/home/dharmy/Documents/tools/ide/nvim-linux64/bin:/home/dharmy/Documents/tools/ngrok:/home/dharmy/Documents/tools/Downloader:$PATH
 
-# Themes.
-ZSH_THEME="bubblified"
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# Case-sensitive completion.
-CASE_SENSITIVE="false"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
-# Disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# Disable marking untracked files under VCS as dirty.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# History.
-HIST_STAMPS="yyyy-mm-dd"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Plugins.
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    torrent
-    archive
-    extract
-    git
-    ssh-agent
-    z
+	git
+	z	
+	extract
+  git-flow-completion
 )
 
-# Environment variables.
-source ~/.exports
+source $ZSH/oh-my-zsh.sh
 
-# Oh My Zsh.
-source ~/.oh-my-zsh/oh-my-zsh.sh
+# User configuration
 
-# User config.
-source ~/.zsh/setopt.zsh
+# export MANPATH="/usr/local/man:$MANPATH"
 
-# Aliases.
-source ~/.aliases
-#source ~/.aliases_private
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# Functions.
-source ~/.functions
-#source ~/.functions_private
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-# Tracks your most used directories, based on frecency with z.
-#source ~/.oh-my-zsh/plugins/z/z.sh
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# dircolors.
-if [ -x "$(command -v dircolors)" ]; then
-    eval "$(dircolors -b ~/.dircolors)"
-fi
-
-# fzf key bindings.
-if [ -x "$(command -v fzf)" ]; then
-#    source ~/.fzf/shell/key-bindings.zsh
-fi
-
-# Manage SSH with Keychain.
-if [ -x "$(command -v keychain)" ]; then
-    eval "$(keychain --eval --quiet id_rsa_github id_rsa_gitlab)"
-fi
-
-# Base16 Shell.
-if [ -f ~/.local/bin/base16-oxide ]; then
-    source ~/.local/bin/base16-oxide
-fi
-export PATH=/home/dharmy/Documents/Tools/Postman/app:/home/dharmy/go/bin:/usr/local/go/bin:/usr/pgadmin4/bin/:/usr/pgadmin4/bin/pgadmin4:$PATH
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"

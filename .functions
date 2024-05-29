@@ -72,7 +72,7 @@ add_path(){
 	current_shell=$SHELL
 	case $current_shell in
 		*"/bin/zsh") file=~/.zshrc ;;
-		*"/bin/bash") file=~/.bashhrc;;
+		*"/bin/bash") file=~/.bashrc;;
 		*) echo "No Compatible Shell Found\nExiting";return;;
 	esac
 	[ ! -z $pat ] || {
@@ -178,4 +178,12 @@ while :; do
 
     sleep 30
 done
+}
+
+copy() {
+  params=$@
+  if [ ! -z $params ] || {
+    return
+  }
+  cat $params | pbcopy
 }
