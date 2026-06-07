@@ -88,7 +88,7 @@ add_path(){
 	prev="${path_line#*export PATH=}"   # strip 'export PATH='
 	prev="${prev%:\$PATH}"              # strip trailing ':$PATH'
 	prev="${prev//\"/}"                 # strip quotes
-	new_line="export PATH=$prev$pat:$""PATH"
+	new_line="export PATH=$prev:$pat:$""PATH"
 	sed -i '' "${line}s@.*@${new_line}@" "$file"
 }
 
