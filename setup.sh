@@ -111,9 +111,6 @@ setup_antigen() {
     if [[ ! -f "${DOTFILES}/antigenrc" ]]; then
         info "  Creating ~/.dotfiles/antigenrc..."
         cat > "${DOTFILES}/antigenrc" << 'EOF'
-# Use Oh-My-Zsh
-antigen use oh-my-zsh
-
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
