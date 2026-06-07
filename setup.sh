@@ -87,7 +87,7 @@ install_ohmyzsh() {
 }
 
 # -----------------------------------------------------------
-# Install antigen and populate ~/.antigenrc
+# Install antigen and populate .antigenrc in ~/.dotfiles
 # -----------------------------------------------------------
 setup_antigen() {
     info "Setting up antigen..."
@@ -102,24 +102,23 @@ setup_antigen() {
         ok "  antigen already present."
     fi
 
-    # Create ~/.antigenrc if missing
-    if [[ ! -f "${HOME}/.antigenrc" ]]; then
-        info "  Creating ~/.antigenrc..."
-        cat > "${HOME}/.antigenrc" << 'EOF'
+    # Create ~/.dotfiles/antigenrc if missing
+    if [[ ! -f "${DOTFILES}/antigenrc" ]]; then
+        info "  Creating ~/.dotfiles/antigenrc..."
+        cat > "${DOTFILES}/antigenrc" << 'EOF'
 # Use Oh-My-Zsh
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle command-not-found
 
 # Apply Configs
 antigen apply
 EOF
-        ok "  ~/.antigenrc created."
+        ok "  ~/.dotfiles/antigenrc created."
     else
-        ok "  ~/.antigenrc already exists — skipped."
+        ok "  ~/.dotfiles/antigenrc already exists — skipped."
     fi
 }
 
@@ -147,7 +146,7 @@ source ~/.dotfiles/.aliases
 source ~/.dotfiles/.functions
 
 # Load Antigen Configs
-antigen init ~/.antigenrc
+antigen init ~/.dotfiles/antigenrc
 EOF
         ok "  ~/.zshrc created."
         return
@@ -202,7 +201,7 @@ EOF
             echo ''
             echo '# >>> dotfiles: antigen bootstrap >>>'
             echo 'source ~/.antigen/antigen.zsh'
-            echo 'antigen init ~/.antigenrc'
+            echo 'antigen init ~/.dotfiles/antigenrc'
             echo '# <<< dotfiles: antigen bootstrap <<<'
         } >> "${ZSHRC}"
     fi
