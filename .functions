@@ -84,9 +84,12 @@ add_path(){
 		echo "export PATH=$pat:$""PATH" >> $file
 		return
 	}
-	prev="$(grep "export PATH" $file| sed -f ~/.pattern.sed| tr -d '\"')"
+	path_line="$(grep "export PATH" "$file")"
+	prev="${path_line#*export PATH=}"   # strip 'export PATH='
+	prev="${prev%:\$PATH}"              # strip trailing ':$PATH'
+	prev="${prev//\"/}"                 # strip quotes
 	new_line="export PATH=$prev$pat:$""PATH"
-	sed -i ''$line's@.*@'$new_line'@' $file
+	sed -i '' "${line}s@.*@${new_line}@" "$file"
 }
 
 # Turn On Or Off Private VPN
