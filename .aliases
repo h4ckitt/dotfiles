@@ -13,7 +13,9 @@ alias 4='cd -4'
 alias 5='cd -5'
 
 # Easy report
-alias ls='ls -Fh --color=auto --group-directories-first'
+if command -v gls &>/dev/null; then alias ls='gls -Fh --color=auto --group-directories-first'; else; alias ls='ls -Fh --color=auto --group-directories-first'; fi
+
+#alias ls='ls -Fh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias l='ls -l'
 alias la='ls -lA'
