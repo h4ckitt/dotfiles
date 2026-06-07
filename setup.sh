@@ -86,7 +86,7 @@ install_ohmyzsh() {
     fi
 
     info "Installing oh-my-zsh..."
-    RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+    RUNZSH=no CHSH=no KEEP_ZSHRC=no \
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     ok "oh-my-zsh installed."
 }
