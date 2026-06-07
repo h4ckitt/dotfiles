@@ -49,6 +49,11 @@ check_deps() {
         exit 1
     fi
 
+    if ! command -v gls &>/dev/null; then
+        err "GNU coreutils (gls) is required but not installed. Run: brew install coreutils"
+        exit 1
+    fi
+
     ok "Dependencies look good."
 }
 
